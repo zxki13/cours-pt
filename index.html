@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cours de prépa PT</title>
+<meta name="description" content="Cours manuscrits de classe préparatoire PT, en libre accès.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbfcff; --line:#d5dff4; --margin:#e0586f;
+  --ink:#16233f; --ink-soft:#56627f;
+  --accent:#2446b8; --accent-ink:#ffffff;
+  --surface:#ffffff; --border:#c3d0ec;
+  --c-pdf:#b8283f; --c-word:#2446b8; --c-ppt:#b4560f; --c-xls:#17704a; --c-zip:#5b4a99; --c-def:#56627f;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10151f; --line:#1d2840; --margin:#b04a5e;
+    --ink:#e6ebf7; --ink-soft:#97a3c2;
+    --accent:#8aa5ff; --accent-ink:#0b1020;
+    --surface:#171e2d; --border:#2b3652;
+    --c-pdf:#ff8397; --c-word:#8aa5ff; --c-ppt:#ffb070; --c-xls:#72d7a4; --c-zip:#b9a8ff; --c-def:#97a3c2;
+  }
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 'Figtree',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-text-size-adjust:100%}
+button,input{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.wrap{max-width:900px;margin:0 auto;padding:36px 20px 72px}
+h1{margin:0;font-family:'Caveat','Segoe Script','Bradley Hand',cursive;font-weight:700;font-size:clamp(52px,10vw,92px);line-height:1;color:var(--accent)}
+.sub{margin:12px 0 0;max-width:58ch;color:var(--ink-soft);font-size:17px}
+
+.bar{margin:30px 0 8px;display:flex;flex-direction:column;gap:14px}
+.bar input{width:100%;max-width:380px;padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:6px 14px;border:1px solid var(--border);border-radius:999px;background:var(--surface);cursor:pointer;font-weight:500;font-size:15px}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.chip .n{opacity:.7;margin-left:6px;font-variant-numeric:tabular-nums;font-size:13px}
+
+section.mat{margin-top:40px}
+section.mat h2{margin:0 0 10px;font-size:24px;font-weight:700;letter-spacing:-.01em}
+section.mat h2 .n{font-size:14px;font-weight:500;color:var(--ink-soft);margin-left:8px;white-space:nowrap;display:inline-block}
+
+/* Feuille Seyès */
+.sheet{position:relative;list-style:none;margin:0;padding:0;
+  background-image:linear-gradient(to bottom,transparent 31px,var(--line) 31px);
+  background-size:100% 32px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sheet::before{content:"";position:absolute;top:0;bottom:0;left:64px;width:2px;background:var(--margin);opacity:.75;pointer-events:none}
+.chap{height:32px;line-height:32px;padding-left:80px;font-weight:700;color:var(--accent);font-size:15px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.row{display:grid;grid-template-columns:64px minmax(0,1fr) auto;height:64px;align-items:center}
+.lead{display:flex;justify-content:center;align-items:center;height:64px}
+.tab{display:inline-block;min-width:44px;padding:2px 6px;text-align:center;font-size:12px;font-weight:700;border-radius:6px 6px 2px 2px;border:1px solid color-mix(in srgb,var(--c,var(--c-def)) 45%,transparent);background:color-mix(in srgb,var(--c,var(--c-def)) 14%,var(--paper));color:var(--c,var(--c-def))}
+.tab[data-e=pdf]{--c:var(--c-pdf)}
+.tab[data-e=docx]{--c:var(--c-word)}
+.tab[data-e=pptx]{--c:var(--c-ppt)}
+.tab[data-e=xlsx]{--c:var(--c-xls)}
+.tab[data-e=zip]{--c:var(--c-zip)}
+.thumb{width:44px;height:44px;padding:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:zoom-in;background:var(--surface)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.info{padding:0 12px 0 16px;min-width:0}
+.nm{display:block;line-height:32px;height:32px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.meta{display:block;line-height:32px;height:32px;font-size:13px;color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acts{display:flex;gap:8px;padding-right:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:7px 14px;border-radius:9px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-weight:600;font-size:15px;text-decoration:none}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn svg{width:18px;height:18px;flex:none}
+
+.msg{margin-top:40px;padding:18px 20px;border:1px dashed var(--border);border-radius:12px;background:var(--surface);color:var(--ink-soft)}
+.msg strong{color:var(--ink)}
+footer{margin-top:64px;font-size:14px;color:var(--ink-soft);max-width:60ch}
+
+.lb{position:fixed;inset:0;z-index:20;background:rgba(8,12,22,.9);display:flex;align-items:center;justify-content:center;padding:20px}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:100%;border-radius:6px;background:#fff}
+.lb button{position:absolute;top:14px;right:16px;background:#fff;color:#16233f;border:0;border-radius:9px;padding:8px 14px;font-weight:600;cursor:pointer}
+
+@media (max-width:540px){
+  .wrap{padding:24px 14px 64px}
+  .btn .tx{display:none}
+  .btn{padding:7px 11px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="titre">Cours de prépa PT</h1>
+    <p class="sub" id="desc">Cours manuscrits de classe préparatoire PT, en libre accès.</p>
+  </header>
+
+  <div class="bar">
+    <label class="vh" for="q">Chercher un cours</label>
+    <input type="search" id="q" placeholder="Chercher un cours ou un chapitre" autocomplete="off">
+    <div class="chips" id="chips" role="group" aria-label="Matières"></div>
+  </div>
+
+  <div id="out" aria-live="polite"></div>
+  <footer id="pied"></footer>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-label="Image agrandie">
+  <button type="button" id="lbx">Fermer</button>
+  <img id="lbimg" alt="">
+</div>
+
+<script>
+(function(){
+'use strict';
+var site={titre:'Cours de prépa PT',description:'Cours manuscrits de classe préparatoire PT, en libre accès.',licence:''};
+var matieres=[], actif='all', recherche='';
+var IMG={png:1,jpg:1,jpeg:1,webp:1,gif:1};
+
+function $(s){return document.querySelector(s)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function url(p){return p.split('/').map(encodeURIComponent).join('/')}
+function fmt(b){if(b<1024)return b+' o';if(b<1048576)return Math.round(b/1024)+' Ko';return (b/1048576).toFixed(1).replace('.',',')+' Mo'}
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+
+var DL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>';
+var OPEN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
+
+function fileRow(f){
+  var ext=(f.type||'').toLowerCase(), u=url(f.chemin), img=IMG[ext];
+  var lead=img
+    ? '<button class="thumb" data-zoom="'+esc(u)+'" data-alt="'+esc(f.titre)+'" aria-label="Agrandir '+esc(f.titre)+'"><img src="'+esc(u)+'" alt="" loading="lazy"></button>'
+    : '<span class="tab" data-e="'+esc(ext)+'">'+esc(ext||'fichier')+'</span>';
+  var open=img
+    ? '<button class="btn primary" data-zoom="'+esc(u)+'" data-alt="'+esc(f.titre)+'">'+OPEN+'<span class="tx">Voir</span></button>'
+    : '<a class="btn primary" href="'+esc(u)+'" target="_blank" rel="noopener" aria-label="Ouvrir '+esc(f.titre)+'">'+OPEN+'<span class="tx">Ouvrir</span></a>';
+  var dl='<a class="btn" href="'+esc(u)+'" download aria-label="Télécharger '+esc(f.titre)+'">'+DL+'<span class="tx">Télécharger</span></a>';
+  return '<li><div class="row"><div class="lead">'+lead+'</div><div class="info"><span class="nm" title="'+esc(f.titre)+'">'+esc(f.titre)+'</span><span class="meta">'+esc(ext.toUpperCase())+' · '+fmt(f.taille||0)+'</span></div><div class="acts">'+open+dl+'</div></div></li>';
+}
+
+function visibles(m){
+  var q=norm(recherche).trim();
+  return m.fichiers.filter(function(f){
+    return !q||norm(f.titre).indexOf(q)>-1||norm(f.chapitre).indexOf(q)>-1||norm(m.titre).indexOf(q)>-1;
+  });
+}
+
+function render(){
+  var total=0;
+  matieres.forEach(function(m){total+=m.fichiers.length});
+
+  $('#chips').innerHTML=total?(['<button class="chip" data-m="all" aria-pressed="'+(actif==='all')+'">Tout<span class="n">'+total+'</span></button>'].concat(matieres.map(function(m){
+    return '<button class="chip" data-m="'+esc(m.id)+'" aria-pressed="'+(actif===m.id)+'">'+esc(m.titre)+'<span class="n">'+m.fichiers.length+'</span></button>';
+  }))).join(''):'';
+
+  var out='',shown=0;
+  matieres.forEach(function(m){
+    if(actif!=='all'&&actif!==m.id)return;
+    var fs=visibles(m);if(!fs.length)return;
+    shown+=fs.length;
+    var h='<section class="mat" id="'+esc(m.id)+'"><h2>'+esc(m.titre)+'<span class="n">'+fs.length+' fichier'+(fs.length>1?'s':'')+'</span></h2><ul class="sheet">',last=null;
+    fs.forEach(function(f){
+      if(f.chapitre&&f.chapitre!==last){h+='<li class="chap">'+esc(f.chapitre)+'</li>'}
+      last=f.chapitre;
+      h+=fileRow(f);
+    });
+    out+=h+'</ul></section>';
+  });
+
+  if(!total)out='<div class="msg"><strong>Il n’y a encore aucun cours ici.</strong><br>Ajoute des PDF dans le dossier <code>cours/</code> du dépôt GitHub : la liste se mettra à jour toute seule.</div>';
+  else if(!shown)out='<div class="msg"><strong>Aucun résultat.</strong><br>Essaie un autre mot, ou choisis « Tout ».</div>';
+  $('#out').innerHTML=out;
+}
+
+document.addEventListener('click',function(e){
+  var c=e.target.closest('[data-m]');
+  if(c){
+    actif=c.dataset.m;
+    try{history.replaceState(null,'',actif==='all'?location.pathname+location.search:'#'+actif)}catch(_){}
+    render();return;
+  }
+  var z=e.target.closest('[data-zoom]');
+  if(z){var im=$('#lbimg');im.src=z.dataset.zoom;im.alt=z.dataset.alt||'';$('#lb').hidden=false}
+});
+function fermer(){$('#lb').hidden=true;$('#lbimg').removeAttribute('src')}
+$('#lbx').addEventListener('click',fermer);
+$('#lb').addEventListener('click',function(e){if(e.target===this)fermer()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('#lb').hidden)fermer()});
+$('#q').addEventListener('input',function(){recherche=this.value;render()});
+
+async function charger(chemin){
+  var r=await fetch(chemin,{cache:'no-cache'});
+  if(!r.ok)throw new Error(r.status);
+  return r.json();
+}
+(async function(){
+  try{Object.assign(site,await charger('site.json'))}catch(_){}
+  document.title=site.titre;
+  $('#titre').textContent=site.titre;
+  $('#desc').textContent=site.description;
+  $('#pied').textContent=site.licence||'';
+  try{
+    var d=await charger('cours.json');
+    matieres=(d.matieres||[]).filter(function(m){return m&&m.fichiers&&m.fichiers.length});
+    var h=decodeURIComponent((location.hash||'').slice(1));
+    if(h&&matieres.some(function(m){return m.id===h}))actif=h;
+    render();
+  }catch(_){
+    $('#out').innerHTML='<div class="msg"><strong>La liste des cours n’a pas pu se charger.</strong><br>Si tu as ouvert ce fichier directement depuis ton ordinateur, passe plutôt par l’adresse GitHub Pages du site.</div>';
+  }
+})();
+})();
+</script>
+</body>
+</html>
